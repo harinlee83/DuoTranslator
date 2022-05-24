@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %} Results {% endblock %}
+
+{% block content %}
+<br />
+<h2 align="left">The DUO Translator</h1>
+<br />
+<h5 align="left">Map your consent form to the GA4GH Data Use Ontology!</h5>
+
+<form action="{{ url_for('views.submit') }}" method ='POST'>
+    <textarea name = 'text' class = 'form-control' placeholder="Copy and paste your consent form text on data sharing and/or secondary use in the box here"></textarea>
+    <br />
+    <div align="center">
+        <button type = 'submit' class ="btn btn-primary">Submit</button>
+    </div>
+</form>
+<br />
+<h2 align="left">Results for: "{{ originalText }}"</h1>
+<hr />
+<table>
+    <tr>
+        <td><h5 align="left">Data Use Permissions</h5></td>
+    </tr>
+    {% if duo != None %}
+    <tr>
+        <td>{{ duo[0] }}</td>
+        <td>{{ duo[1] }}</td>
+    </tr>
+    {% endif %}
+</table>
+<br />
+<div>
+    <h5 align="left">Data Use Modifiers</h5>
+</div>
+<br />
+<div>
+    {% if doid!=None or mondo!=None %}
+    <table>
+        <tr>
+            <td><h5 align="left">Alternative Possible Disease Mappings</h5></td>
+        </tr>
+        {% for key in doid %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ doid[key] }}</td>
+        </tr>
+        {% endfor %}
+        {% for key in mondo %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ mondo[key] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br />
+</div>
+
+{% endblock %}

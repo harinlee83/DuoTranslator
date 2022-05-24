@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<br />
+<h2 align="left">The DUO Translator</h1>
+<h5 align="left">Map your consent form to the GA4GH Data Use Ontology!</h5>
+
+<form action="{{ url_for('views.submit') }}" method ='POST'>
+    <textarea name = 'text' class = 'form-control' placeholder="Copy and paste your consent form text on data sharing and/or secondary use in the box here"></textarea>
+    <br />
+    <div align="center">
+        <button type = 'submit' class ="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+{% endblock %}
