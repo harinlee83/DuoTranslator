@@ -5,7 +5,7 @@ import json
 import re
 from urllib.parse import quote
 
-list_of_terms_CSV_file = "csv files/TermMapping.csv"
+list_of_terms_CSV_file = "website/csv files/TermMapping.csv"
 fileArray = pandas.read_csv(list_of_terms_CSV_file)
 query = fileArray["Query for:"]
 purl = fileArray["If found, then add*:"]
