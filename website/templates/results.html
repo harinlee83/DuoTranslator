@@ -1,45 +1,49 @@
 {% extends "home.html" %}
 {% block title %} Results {% endblock %}
 
-{% block content %}
-<h2 class="heading3">Results for: "{{ originalText }}"</h1>
-<table>
-    <tr>
-        <td><h5 align="left">Data Use Permissions</h5></td>
-    </tr>
-    {% if duo != None %}
-    <tr>
-        <td>{{ duo[0] }}</td>
-        <td>{{ duo[1] }}</td>
-    </tr>
-    {% endif %}
-</table>
-<br />
-<div>
-    <h5 align="left">Data Use Modifiers</h5>
+{% block results %}
+<div class = "bottom-row">
+    <h2 class="heading3">Results for: "{{ originalText }}"</h1>
+        {% if duo != None%}
+            <table>
+                <caption><h5 class="heading4">Data Use Permissions</h5></caption>
+                    {% for permission in duo[2] %}
+                        {% if permission == "X" %}
+                            <tr>
+                                <td class="table-data">{{ duo[0][loop.index0] }}</td>
+                                <td class="table-data">{{ duo[1][loop.index0] }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+            </table>
+            <table>
+                <caption><h5 class="heading4">Data Use Modifiers</h5></caption>
+                    {% for permission in duo[2] %}
+                        {% if permission != "X" %}
+                            <tr>
+                                <td class="table-data">{{ duo[0][loop.index0] }}</td>
+                                <td class="table-data">{{ duo[1][loop.index0] }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+            </table>
+        {% endif %}
+        <table>
+                        {% if doid!=None or mondo!=None %}
+                        <caption><h5 class="heading4">Alternative Possible Disease Mappings</h5></caption>
+                        {% for key in doid %}
+                        <tr>
+                            <td class="table-data">{{ key }}</td>
+                            <td class="table-data">{{ doid[key] }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% for key in mondo %}
+                        <tr>
+                            <td class="table-data">{{ key }}</td>
+                            <td class="table-data">{{ mondo[key] }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% endif %}
+        </table>
 </div>
-<br />
-<div>
-    {% if doid!=None or mondo!=None %}
-    <table>
-        <tr>
-            <td><h5 align="left">Alternative Possible Disease Mappings</h5></td>
-        </tr>
-        {% for key in doid %}
-        <tr>
-            <td>{{ key }}</td>
-            <td>{{ doid[key] }}</td>
-        </tr>
-        {% endfor %}
-        {% for key in mondo %}
-        <tr>
-            <td>{{ key }}</td>
-            <td>{{ mondo[key] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-    <br />
-</div>
-
 {% endblock %}

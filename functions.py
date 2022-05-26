@@ -1,4 +1,5 @@
 import csv
+from math import perm
 import pandas
 import requests
 import json
@@ -8,19 +9,26 @@ from urllib.parse import quote
 list_of_terms_CSV_file = "website/csv files/TermMapping.csv"
 fileArray = pandas.read_csv(list_of_terms_CSV_file)
 query = fileArray["Query for:"]
-purl = fileArray["If found, then add*:"]
-zip_iterator = zip(query,purl)
-mappedData = dict(zip_iterator)
+purls = fileArray["If found, then add*:"]
+permissions = fileArray["Primary Permission Terms"]
 
 def getDuo(text):
-    for key in mappedData:
+    queryMatches = []
+    purlMatches = []
+    permissionMatches = []
+    for queryTerm,purl,permission in zip(query,purls,permissions):
         # Add regex word boundaries
-        pattern = re.compile(r'\b' + key + r'\b',re.IGNORECASE)
+        pattern = re.compile(r'\b' + queryTerm + r'\b',re.IGNORECASE)
         matches = re.search(pattern,text)
-        if matches:
-            duo = [key,mappedData[key]]
-            return duo
-    return None
+        if matches and purl not in purlMatches:
+            queryMatches.append(queryTerm)
+            purlMatches.append(purl)
+            permissionMatches.append(permission)
+    if len(queryMatches) == 0:
+        duo = None
+    else:
+        duo = [queryMatches,purlMatches,permissionMatches]
+    return duo
 
 def getDoid(text):
     if text != "":

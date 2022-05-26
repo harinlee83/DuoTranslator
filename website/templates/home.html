@@ -7,39 +7,47 @@
         <link rel="stylesheet" type = "text/css" href="../static/css/style.css">
     </head>
     <body>
-            <div class = "top-row">
-                <nav class="nav-bar">
-                    <ul>
-                        <li>
-                            <a href = "/">
-                                <img src="../static/images/duos-network-logo.svg" alt="DUOS Logo" style="height: 50px;">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">About</a>
-                        </li>
-                        <li>
-                            <a href="/">FAQs</a>
-                        </li>
-                        <li>
-                            <a href="/">Contact Us</a>
-                        </li>
-                    </ul>
-                </nav>
-                <h1 class = "heading1">The DUO Translator</h1>
-                <h3 class = "heading2">Map your consent form to the GA4GH Data Use Ontology!</h5>
-                <div class = "container-body">
-                    <form class = "my-form" action="{{ url_for('views.submit') }}" method ='POST'>
+        <div class = "top-row">
+            <nav class="nav-bar">
+                <ul>
+                    <li>
+                        <a href = "/">
+                            <img src="../static/images/duos-network-logo.svg" alt="DUOS Logo" style="height: 50px; padding-right: 10px;">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <img src="../static/images/about.svg" alt="About Icon" style="display: inline-block; width: 16px; height: 16px; margin: 0px 8px 0px 0px; vertical-align: baseline;">
+                            About
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <img src="../static/images/help.svg" alt="About Icon" style="display: inline-block; width: 16px; height: 16px; margin: 0px 8px 0px 0px; vertical-align: baseline;">
+                            FAQs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                        <img src="../static/images/contact_us.svg" alt="About Icon" style="display: inline-block; width: 16px; height: 16px; margin: 0px 8px 0px 0px; vertical-align: baseline;">
+                            Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+                    <h1 class = "heading1">The DUO Translator</h1>
+                        <h3 class = "heading2">Map your consent form to the GA4GH Data Use Ontology!</h5>
+                    <div class = "container-body">
+                        <form class = "my-form" action="{{ url_for('views.submit') }}" method ='POST'>
                         <textarea name = 'text' placeholder="Copy and paste your consent form text on data sharing and/or secondary use in the box here"></textarea>
                         <br />
                         <div class="buttonHolder">
-                            <button type = 'submit'>Submit</button>
-                        </div>
+                        <button type = 'submit'>Submit</button>
+                    </div>
                     </form>
-                </div>
-            </div>
-    
-            {% block content %}
+                    </div>
+        </div>
+            {% block results %}
             {% endblock %}
     </body>
 </html>

@@ -15,6 +15,9 @@ def submit():
     # Default
     match1 = False
     match2 = False
+    duo = None
+    doid = None
+    mondo = None
     originalText = request.form.get("text")
     text = originalText
     # Looks for "DISEASE" or "DISORDER"
@@ -53,5 +56,5 @@ def submit():
         doid = None
     
     duo = getDuo(originalText)
-
+    print(f"Searching of {text}")
     return render_template("results.html",originalText=originalText, duo = duo, doid = doid, mondo = mondo)
