@@ -1,6 +1,6 @@
 # DuoTranslator
 
-This app was built from Python, Flask, HTML, and CSS.
+This app was built from Python (Flask), HTML, and CSS.
 
 Website styling and images sourced from: https://duos.broadinstitute.org/
 
