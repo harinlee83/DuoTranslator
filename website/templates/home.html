@@ -16,38 +16,45 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/">
+                        <a href="https://broad-duos.zendesk.com/hc/en-us/articles/360060400311-About-DUOS">
                             <img src="../static/images/about.svg" alt="About Icon" style="display: inline-block; width: 16px; height: 16px; margin: 0px 8px 0px 0px; vertical-align: baseline;">
                             About
                         </a>
                     </li>
                     <li>
-                        <a href="/">
+                        <a href="https://broad-duos.zendesk.com/hc/en-us/articles/360059957092-Frequently-Asked-Questions-FAQs-">
                             <img src="../static/images/help.svg" alt="About Icon" style="display: inline-block; width: 16px; height: 16px; margin: 0px 8px 0px 0px; vertical-align: baseline;">
                             FAQs
                         </a>
                     </li>
-                    <li>
-                        <a href="/">
-                        <img src="../static/images/contact_us.svg" alt="About Icon" style="display: inline-block; width: 16px; height: 16px; margin: 0px 8px 0px 0px; vertical-align: baseline;">
-                            Contact Us
-                        </a>
-                    </li>
                 </ul>
             </nav>
-                    <h1 class = "heading1">The DUO Translator</h1>
-                        <h3 class = "heading2">Map your consent form to the GA4GH Data Use Ontology!</h5>
-                    <div class = "container-body">
-                        <form class = "my-form" action="{{ url_for('views.submit') }}" method ='POST'>
-                        <textarea name = 'text' placeholder="Copy and paste your consent form text on data sharing and/or secondary use in the box here"></textarea>
-                        <br />
-                        <div class="buttonHolder">
-                        <button type = 'submit'>Submit</button>
+            <h1 class = "heading1">The DUO Translator</h1>
+            <h3 class = "heading2">Map your consent form to the GA4GH Data Use Ontology!</h5>
+            <div class = "container-body">
+                <form class = "my-form" action="{{ url_for('views.submit') }}" method ='POST'>
+                    <textarea autofocus name = 'text' placeholder="Copy and paste your consent form text on data sharing and/or secondary use in the box here"></textarea>
+                    <br />
+                    <div class="buttonHolder">
+                        <button type = 'submit' id = "main-button">Submit</button>
                     </div>
-                    </form>
-                    </div>
+                </form>
+            </div>
         </div>
+        <div class = "bottom-row">
             {% block results %}
             {% endblock %}
+        </div>
+        <div style="clear: both; background-color: rgb(0, 0, 0);">
+            <footer style="display: block; width: 100%;">
+                <img src="../static/images/broadlogo.png" alt="Broad Institute logo" style="float: left; height: 32px; margin-top: 15px; margin-right: 35px;">
+                <ul class="footer-links">
+                    <li class="footer-links__item">© Broad Institute</li>
+                    <li class="footer-links__item"><a href="https://duos.broadinstitute.org/privacy">Privacy Policy</a></li>
+                    <li class="footer-links__item"><a href="https://duos.broadinstitute.org/tos">Terms of Service</a></li>
+                    <li class="footer-links__item"><a href="https://duos.broadinstitute.org/status">Status</a></li>
+                </ul>
+            </footer>
+        </div>
     </body>
 </html>

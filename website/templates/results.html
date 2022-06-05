@@ -2,48 +2,66 @@
 {% block title %} Results {% endblock %}
 
 {% block results %}
-<div class = "bottom-row">
     <h2 class="heading3">Results for: "{{ originalText }}"</h1>
-        {% if duo != None%}
-            <table>
-                <caption><h5 class="heading4">Data Use Permissions</h5></caption>
-                    {% for permission in duo[2] %}
-                        {% if permission == "X" %}
-                            <tr>
-                                <td class="table-data">{{ duo[0][loop.index0] }}</td>
-                                <td class="table-data">{{ duo[1][loop.index0] }}</td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-            </table>
-            <table>
-                <caption><h5 class="heading4">Data Use Modifiers</h5></caption>
-                    {% for permission in duo[2] %}
-                        {% if permission != "X" %}
-                            <tr>
-                                <td class="table-data">{{ duo[0][loop.index0] }}</td>
-                                <td class="table-data">{{ duo[1][loop.index0] }}</td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-            </table>
-        {% endif %}
-        <table>
-                        {% if doid!=None or mondo!=None %}
+        <div class="flex-container">
+            {% if duo != None%}
+                {% if "X" in duo[2] %}
+                    <div class="flex-box">
+                        <table>
+                            <caption><h5 class="heading4">Data Use Permissions</h5></caption>
+                                {% for permission in duo[2] %}
+                                    {% if permission == "X" %}
+                                        <tr>
+                                            <td class="table-data">{{ duo[0][loop.index0] }}</td>
+                                            <td class="table-data">{{ duo[1][loop.index0] }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
+                {% if " " in duo[2] %}
+                    <div class="flex-box">
+                        <table>
+                            <caption><h5 class="heading4">Data Use Modifiers</h5></caption>
+                                {% for permission in duo[2] %}
+                                    {% if permission != "X" %}
+                                        <tr>
+                                            <td class="table-data">{{ duo[0][loop.index0] }}</td>
+                                            <td class="table-data">{{ duo[1][loop.index0] }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                        </table>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% if doid|length !=0 or mondo|length !=0 %}
+                <div class="flex-box">
+                    <table>
                         <caption><h5 class="heading4">Alternative Possible Disease Mappings</h5></caption>
                         {% for key in doid %}
-                        <tr>
-                            <td class="table-data">{{ key }}</td>
-                            <td class="table-data">{{ doid[key] }}</td>
-                        </tr>
+                            <tr>
+                                <td class="table-data">{{ key }}</td>
+                                <td class="table-data">{{ doid[key] }}</td>
+                            </tr>
                         {% endfor %}
                         {% for key in mondo %}
-                        <tr>
-                            <td class="table-data">{{ key }}</td>
-                            <td class="table-data">{{ mondo[key] }}</td>
-                        </tr>
-                    {% endfor %}
-                    {% endif %}
-        </table>
-</div>
+                            <tr>
+                                <td class="table-data">{{ key }}</td>
+                                <td class="table-data">{{ mondo[key] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+        <br />
+        <div class="buttonHolder">
+            <h5 id = "rate">Help us improve our search algorithm! Were these results helpful?</h5>
+            <button id = "helpful">Helpful</button>
+            <button id = "not-helpful">Not Helpful</button>
+        </div>
+        <br />
 {% endblock %}

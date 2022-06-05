@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template,request, flash, jsonify
-import json
+from flask import Blueprint, render_template,request
 import re
 from functions import getDoid, getDuo, getMondo
 from keywords import removeWords, keyList1, keyList2
@@ -12,22 +11,24 @@ def home():
 
 @views.route('/results',methods = ['POST'])
 def submit():
+
     # Default
     match1 = False
     match2 = False
-    duo = None
-    doid = None
-    mondo = None
+
+    # Save user input text
     originalText = request.form.get("text")
     text = originalText
-    # Looks for "DISEASE" or "DISORDER"
+
+    # Looks for "disease" or "disorder" in input text
     for key1 in keyList1:
         pattern1 = re.compile(r'\b' + key1 + r'\b',re.IGNORECASE)
         matches1 = re.search(pattern1,text)
         if matches1:
             match1 = True
             break
-    # Looks for GRU or HMB
+
+    # Looks for variations of "General Research Use" or "Health/Medical/Biomedical" in input text
     for key2 in keyList2:
         pattern2 = re.compile(r'\b' + key2 + r'\b',re.IGNORECASE)
         matches2 = re.search(pattern2,text)
@@ -35,6 +36,7 @@ def submit():
             match2 = True
             break
 
+    # Algorithm for looking for alternate disease mappings
     # If (Disease or Disorder) OR NOT (GSU or HMB)
     if match1 or not match2:
         # Take consent title, remove list of key words and extra whitespaces
@@ -43,18 +45,22 @@ def submit():
             text = re.sub(pattern,"",text)
         # Remove leading whitespace
         text = re.sub(r"^\W*","",text)
+
         # Remove trailing whitespace
         text = re.sub(r"\W*$","",text)
+
         # Remove random punctation
         text = re.sub(r"[,/()]"," ",text)
+
         # Remove 2 or more whitespace
         text = re.sub(r" +"," ",text)
+
+        # Get DOID and MONDO only for alternative disease mapping
         mondo = getMondo(text)
         doid = getDoid(text)
     else:
-        mondo = None
-        doid = None
-    
+        mondo = {}
+        doid = {}
+
     duo = getDuo(originalText)
-    print(f"Searching of {text}")
     return render_template("results.html",originalText=originalText, duo = duo, doid = doid, mondo = mondo)
