@@ -2,13 +2,13 @@
 {% block title %} Results {% endblock %}
 
 {% block results %}
-    <h2 class="heading3">Results for: "{{ originalText }}"</h1>
+    <h3 class="heading3">Results for: "{{ originalText }}"</h1>
         <div class="flex-container">
             {% if duo != None%}
                 {% if "X" in duo[2] %}
                     <div class="flex-box">
                         <table>
-                            <caption><h5 class="heading4">Data Use Permissions</h5></caption>
+                            <caption><h4 class="heading4">Data Use Permissions</h5></caption>
                                 {% for permission in duo[2] %}
                                     {% if permission == "X" %}
                                         <tr>
@@ -23,7 +23,7 @@
                 {% if " " in duo[2] %}
                     <div class="flex-box">
                         <table>
-                            <caption><h5 class="heading4">Data Use Modifiers</h5></caption>
+                            <caption><h4 class="heading4">Data Use Modifiers</h5></caption>
                                 {% for permission in duo[2] %}
                                     {% if permission != "X" %}
                                         <tr>
@@ -40,7 +40,7 @@
             {% if doid|length !=0 or mondo|length !=0 %}
                 <div class="flex-box">
                     <table>
-                        <caption><h5 class="heading4">Alternative Possible Disease Mappings</h5></caption>
+                        <caption><h4 class="heading4">Alternative Possible Disease Mappings</h5></caption>
                         {% for key in doid %}
                             <tr>
                                 <td class="table-data">{{ key }}</td>
@@ -59,7 +59,7 @@
         </div>
         <br />
         <div class="buttonHolder">
-            <h5 id = "rate">Help us improve our search algorithm! Were these results helpful?</h5>
+            <h4 id = "rate">Help us improve our search algorithm! Were these results helpful?</h5>
             <button id = "helpful">Helpful</button>
             <button id = "not-helpful">Not Helpful</button>
         </div>
