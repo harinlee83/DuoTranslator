@@ -8,4 +8,5 @@
 
 ## How to Run
 
-To locally start the application, simply run **main.py** in your terminal and follow the link
+To locally start the application,
+`pip install -r requirements.txt` in terminal and then run **main.py**.
