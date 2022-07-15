@@ -1,6 +1,8 @@
-# This file contains lists of terms that are refrenced by other scripts
+# This file contains lists of terms that are referenced by other scripts
 # Terms will be added/removed from the lists based on the quality of results
 
+
+# These are words that are removed from the user input when constructing an appropriate query term for the OLS
 removeWords = ["Disease-Specific",
                "Disease Specific",
                "General Research Use",
@@ -58,6 +60,11 @@ removeWords = ["Disease-Specific",
                "The Regents of the University of California San Francisco"
                ]
 
+# This is the first list of keywords to identify in the user input
+keyList1 = ["Disease",
+           "Disorder"]
+
+# This is the second list of keywords to identify in the user input
 keyList2 = ["GRU",
             "General Research",
             "General Research Use",
@@ -69,6 +76,3 @@ keyList2 = ["GRU",
             "Health medical biomedical research",
             "health/medical/biomedcal research",
             "health/medical/biomedical"]
-
-keyList1 = ["Disease",
-           "Disorder"]

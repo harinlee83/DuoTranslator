@@ -18,12 +18,12 @@ def submit():
 
     # Save user input text
     originalText = request.form.get("text")
-    text = originalText
+    processedText = originalText
 
     # Looks for "disease" or "disorder" in input text
     for key1 in keyList1:
         pattern1 = re.compile(r'\b' + key1 + r'\b',re.IGNORECASE)
-        matches1 = re.search(pattern1,text)
+        matches1 = re.search(pattern1,processedText)
         if matches1:
             match1 = True
             break
@@ -31,7 +31,7 @@ def submit():
     # Looks for variations of "General Research Use" or "Health/Medical/Biomedical" in input text
     for key2 in keyList2:
         pattern2 = re.compile(r'\b' + key2 + r'\b',re.IGNORECASE)
-        matches2 = re.search(pattern2,text)
+        matches2 = re.search(pattern2,processedText)
         if matches2:
             match2 = True
             break
@@ -42,22 +42,22 @@ def submit():
         # Take consent title, remove list of key words and extra whitespaces
         for word in removeWords:
             pattern = re.compile(r"\b" + word + r"\b",re.IGNORECASE)
-            text = re.sub(pattern,"",text)
+            processedText = re.sub(pattern,"",processedText)
         # Remove leading whitespace
-        text = re.sub(r"^\W*","",text)
+        processedText = re.sub(r"^\W*","",processedText)
 
         # Remove trailing whitespace
-        text = re.sub(r"\W*$","",text)
+        processedText = re.sub(r"\W*$","",processedText)
 
         # Remove random punctation
-        text = re.sub(r"[,/()]"," ",text)
+        processedText = re.sub(r"[,/()]"," ",processedText)
 
         # Remove 2 or more whitespace
-        text = re.sub(r" +"," ",text)
+        processedText = re.sub(r" +"," ",processedText)
 
         # Get DOID and MONDO only for alternative disease mapping
-        mondo = getMondo(text)
-        doid = getDoid(text)
+        mondo = getMondo(processedText)
+        doid = getDoid(processedText)
     else:
         mondo = {}
         doid = {}
