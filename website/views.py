@@ -12,7 +12,7 @@ def home():
 @views.route('/results',methods = ['POST'])
 def submit():
 
-    # Default
+    # Default booleans for algorithm decision making
     match1 = False
     match2 = False
 
@@ -20,7 +20,10 @@ def submit():
     originalText = request.form.get("text")
     processedText = originalText
 
-    # Looks for "disease" or "disorder" in input text
+    # Get Data Use Permissions and Data Use Modifiers
+    duo = getDuo(originalText)
+
+    # Criteria 1: Looks for "disease" or "disorder" in input text
     for key1 in keyList1:
         pattern1 = re.compile(r'\b' + key1 + r'\b',re.IGNORECASE)
         matches1 = re.search(pattern1,processedText)
@@ -28,7 +31,7 @@ def submit():
             match1 = True
             break
 
-    # Looks for variations of "General Research Use" or "Health/Medical/Biomedical" in input text
+    # Criteria 2: Looks for variations of "General Research Use" or "Health/Medical/Biomedical" in input text
     for key2 in keyList2:
         pattern2 = re.compile(r'\b' + key2 + r'\b',re.IGNORECASE)
         matches2 = re.search(pattern2,processedText)
@@ -36,7 +39,7 @@ def submit():
             match2 = True
             break
 
-    # Algorithm for looking for alternate disease mappings
+    # Get Alternative Disease Mappings:
     # If (Disease or Disorder) OR NOT (GSU or HMB)
     if match1 or not match2:
         # Take consent title, remove list of key words and extra whitespaces
@@ -61,6 +64,5 @@ def submit():
     else:
         mondo = {}
         doid = {}
-
-    duo = getDuo(originalText)
+    
     return render_template("results.html",originalText=originalText, duo = duo, doid = doid, mondo = mondo)
