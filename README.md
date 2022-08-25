@@ -1,5 +1,7 @@
 # DuoTranslator
 
+- Deployed here: https://duo-translator.herokuapp.com/
+
 - The DUO translator is an application that ingests consent form text and maps it to suggested terms in the GA4GH Data Use Ontology Standard. It is intended to be used by researchers to easily view data use permissions, data use modifiers, and alternative possible disease mappings associated with a consent form. Developed using Flask, the DUO translator relies on HTTP requests to the Ontology Lookup Service API (https://www.ebi.ac.uk/ols/index).
 - Website styling and images sourced from: https://duos.broadinstitute.org/
 - Note: Helpful/Not helpful button feature not yet implemented.
